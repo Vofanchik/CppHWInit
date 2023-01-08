@@ -4,69 +4,75 @@ using namespace std;
 
 int main()
 {
-    setlocale(LC_ALL, "Russian");
-    char a;
-    string tex = "Введите операцию: для сложения +, вычитания -, умножения *, деления /, факториала !, степени ^, выхода q";
-    cout << tex << endl;
-    cin >> a;
-    while (a != 'q')
+    setlocale(LC_ALL, "Russian");  
+
+    cout << "для шифрования - 1, дешифрования - 2, остальное для выхода" << endl;
+    int sel = 0;
+    cin >> sel;
+    char *greet = new char[];
+    cin >> greet;
+    cout << greet;
+    while (sel == 1 || sel == 2)
     {
-        int x,y;
-        cout << "Введите левый операнд" << endl;
-        cin >> x;
+        int size;
+        cout << "введите размер массива" << endl;
+        cin >> size;
+        int shift;
+        cout << "введите размер сдвига" << endl;
+        cin >> shift;
+        char *array = new char[size];
+        cout << "введите символы поочерёдно" << endl;
 
-        if (a != '!') {
-            cout << "Введите правый операнд" << endl;
-            cin >> y;
-        }
-
-        switch (a)
+        for (int i = 0; i < size; ++i)
         {
-        case '-':
-            cout << x << " - " << y << " = " << x - y << endl;
-            break;
-        case '+':
-            cout << x << " + " << y << " = " << x + y << endl;
-            break;
-        case '*':
-            cout << x << " * " << y << " = " << x * y << endl;
-            break;
-        case '\\':
-            if (y == 0) {
-                cout << "на ноль не делится" << endl;
-                break;
-            }
-            cout << x << " / " << y << " = " << x / float(y) << endl;
-            break;
+            cin >> array[i]; 
+        }
         
-        case '!': {
-            int fac = 1;
-            int i = 1;
-            while (i < x) {
-                fac *= ++i;
-            }
-            cout << "Факториал числа " << x << " = " << fac << endl;
-            break;
-        }
-        case '^': {
-            int i = 1;
-            int power = 1;
-            while (i <= y)
+        if (sel == 1)
+        {
+            for (int i = 0; i < size; ++i)
             {
-                power *= x;
-                i++;
+                if (array[i] == 'z') 
+                {
+                    array[i] = 'a' + shift - 1; 
+                }
+                else if (array[i] == 'Z')
+                {
+                    array[i] = 'A' + shift - 1;
+                }
+                else
+                {
+                    array[i] += shift;
+                }
             }
+        }
+        else
+        {
+            for (int i = 0; i < size; ++i)
+            {
+                if (array[i] == 'z')
+                {
+                    array[i] = 'a' - shift - 1;
+                }
+                else if (array[i] == 'Z')
+                {
+                    array[i] = 'A' - shift - 1;
+                }
+                else
+                {
+                    array[i] -= shift;
+                }
+            }
+        }
 
-            cout << x << " в " << y << " степени = " << power << endl;
-            break;
+        for (int i = 0; i < size; ++i)
+        {
+            cout << array[i]; 
         }
-        default:
-            cout << "ошибка";
-            break;
-        }
-        cout << tex << endl;
-        cin >> a;
+
+        delete[] array;
+        cout << endl << "для шифрования - 1, дешифрования - 2, остальное для выхода" << endl;
+        cin >> sel;
     }
-    
     return 0;
 }
