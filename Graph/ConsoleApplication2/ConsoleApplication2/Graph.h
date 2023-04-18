@@ -33,4 +33,5 @@ private:
     int vertexes[SIZE]; // хранилище вершин
     int vertexCount; // количество добавленных вершин
 };
-#endif
+#endif 
+//rg
