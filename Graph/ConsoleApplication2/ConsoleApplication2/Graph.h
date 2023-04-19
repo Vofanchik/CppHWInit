@@ -19,6 +19,8 @@ public:
     void show();
     //поиск количества путей
 
+    void findMinDistanceDecstr(int fromVert);
+
     void pathCountInner(int current, int to, bool visited[], int& count);
     int pathCount(int from, int to);
     void width(int start);

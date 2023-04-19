@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Graph/ConsoleApplication2/ConsoleApplication2.sln
+/Graph/ConsoleApplication2/ConsoleApplication2/ConsoleApplication2.vcxproj.user
+/Graph/ConsoleApplication2/ConsoleApplication2/ConsoleApplication2.vcxproj.filters
+/Graph/ConsoleApplication2/ConsoleApplication2/ConsoleApplication2.vcxproj

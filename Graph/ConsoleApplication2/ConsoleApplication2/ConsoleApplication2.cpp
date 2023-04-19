@@ -34,9 +34,10 @@ int main()
     g.addEdge(9, 6, 1);
     g.addEdge(9, 5, 1);
 
-    g.show();
-    g.width(0);
-    g.depth(0);
-    std::cout<<g.pathCount(0, 9);
+    //g.show();
+    //g.width(0);
+    //g.depth(0);
+    //std::cout<<g.pathCount(0, 9);
+    g.findMinDistanceDecstr(0);
 }
 
