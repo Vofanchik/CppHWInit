@@ -3,6 +3,101 @@
 
 #define VERYBIGINT 1000000000 // очень большое число
 
+#define VERYBIGINT 1000000000
+
+void Graph::findMinDistancesFloyd() //Флойд
+{
+    int weights[SIZE][SIZE]; // матрица путей
+    // инициализаци матрицы
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            if (i == j)
+            {
+                weights[i][j] = 0; // путь до самой себя равен 0
+            }
+            else {
+                if (!edgeExists(i, j))
+                {
+                    weights[i][j] = VERYBIGINT; // если ребра нет
+                }
+                else {
+                    weights[i][j] = matrix[i][j]; // если ребро есть
+                }
+            }
+        }
+    }
+
+
+
+    for (int k = 0; k < vertexCount; k++) // итерации по k
+    {
+        int ck = vertexes[k]; // возьмем номер вершины
+        for (int i = 0; i < vertexCount; i++)
+        {
+            if (i == k)
+                continue;
+            int ci = vertexes[i];
+            for (int j = 0; j < vertexCount; j++)
+            {
+                if (j == k)
+                    continue;
+                int cj = vertexes[j];
+                if (weights[ci][ck] + weights[ck][cj] < weights[ci][cj]) {
+                    // пересчет мматрицы путей
+                    weights[ci][cj] = weights[ci][ck] + weights[ck][cj];
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < vertexCount; i++)
+    {
+        // вывод всех минимальных путей от вершины '0'
+        std::cout << "V" << i << ": " << weights[0][vertexes[i]] << ", ";
+    }
+}
+
+int Graph::findMinWayDFS(int from, int to) {
+
+    bool visited[SIZE]; // массив пройденных вершин
+    for (int i = 0; i < SIZE; i++)
+        visited[i] = false;
+    int min = VERYBIGINT; // начальное минимальное расстояние
+    int currentDistance = 0;
+
+    inner(from, to, visited, min, currentDistance);
+    return min;
+}
+
+void Graph::inner(
+    int current, int to, bool visited[], int& min, int currentDistance)
+{
+    if (current == to)
+    {
+        // если попали в целевую вершину, сравниваем текущий путь с минимальным
+        if (min > currentDistance)
+        {
+            // если новое расстояние меньше, запоминаем
+            min = currentDistance;
+        }
+        return;
+    }
+    visited[current] = true; // обозначем вершину посещенной
+    for (int i = 0; i < SIZE; i++)
+    {
+        if (edgeExists(current, i) && !visited[i])
+        {
+            // запускаем рекурсию для всех непосещенных смежных вершин
+            int newDist = currentDistance + matrix[current][i];
+            inner(i, to, visited, min, newDist);
+        }
+    }
+    // отмечаем, что путь уже не содержит эту вершину
+    visited[current] = false;
+}
+
 void Graph::findMinDistanceDecstr(int fromVert) //Дейкстра
 {
     int distances[SIZE]; // массив меток

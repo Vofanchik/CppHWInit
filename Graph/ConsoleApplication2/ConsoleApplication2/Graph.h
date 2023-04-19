@@ -4,7 +4,7 @@
 
 #define SIZE 10
 
-class Graph {
+class Graph { 
 public:
     void depth(int start);
     Graph();
@@ -18,6 +18,12 @@ public:
     void delEdge(int v1, int v2);
     void show();
     //поиск количества путей
+
+    void findMinDistancesFloyd();
+
+    int findMinWayDFS(int from, int to);
+
+    void inner(int current, int to, bool visited[], int& min, int currentDistance);
 
     void findMinDistanceDecstr(int fromVert);
 
