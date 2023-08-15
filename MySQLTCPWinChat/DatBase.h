@@ -15,7 +15,7 @@ public:
 		if (&mysql == nullptr) {
 			cout << "Error: can't create MySQL-descriptor" << endl;
 		}
-		if (!mysql_real_connect(&mysql, "localhost", "root", "33mulido", "testdb", NULL, NULL, 0)) {
+		if (!mysql_real_connect(&mysql, "localhost", "root", "admin", "testdb", NULL, NULL, 0)) {
 			cout << "Error: can't connect to database " << mysql_error(&mysql) << endl;
 		}
 		mysql_query(&mysql, "CREATE TABLE table_chat(id INT AUTO_INCREMENT PRIMARY KEY, from_ VARCHAR(255), text VARCHAR(255))");

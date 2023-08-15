@@ -10,6 +10,8 @@
 #include "message.h"
 #include <vector>
 #include "DatBase.h"
+#include <ctime>
+#include "Logger.h"
 
 #pragma comment (lib, "Ws2_32.lib")
 #define DEFAULT_BUFLEN 512
@@ -33,6 +35,10 @@ std::string text, from;
 std::vector<Message> messages;
 
 DatBase* db = new(DatBase);
+
+Logger logger;
+
+
 
 
 int main()
@@ -71,6 +77,14 @@ int main()
 
             messages.push_back(*mmm);
             unser = "";
+
+            std::time_t dtime = std::time(nullptr);
+            std::string now = asctime(localtime(&dtime));
+            std::string logMessage =  now  + "message from " + from;
+            
+            logger.writeLog(logMessage);
+
+
             for (auto& mess : messages) {
                 unser.append("\nfrom:\n");
                 unser.append(mess.GetFrom());
